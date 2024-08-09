@@ -1,0 +1,51 @@
+<div class="main">
+
+
+    <div  class="pages">
+        
+        <ng-container *ngFor="let singlePage of stepperPages"  >
+            <div class="header">
+                <p class="page" [ngClass]="{'active' : selected == singlePage.page}"  [ngClass]="{'active__prev':selected > singlePage.page}" (click)="selected = singlePage.page" [class.active]="selected == singlePage.page"  >{{singlePage.page}}</p>
+                <h1 class="pages__text">{{singlePage.title}}</h1>
+
+            </div>
+        </ng-container>
+         
+    </div>
+    <div class="form">
+    
+        <div class="showDetails" [ngSwitch]="selected">
+            <div *ngSwitchCase="2"  >
+                <div>
+                    <app-basic-details [formInfo]="data.basicDetails"  (sendFormData)="updateBasicDetails($event)"  ></app-basic-details>
+                </div>
+             </div>
+            <h3 *ngSwitchCase="1" >
+                <div>
+                    <app-family-details></app-family-details>
+                </div>
+            </h3>
+            <h3 *ngSwitchCase="3" > <app-creative></app-creative> </h3>
+            <h3 *ngSwitchCase="4" ><app-address></app-address> </h3>
+            <h3 *ngSwitchCase="5" ><app-result></app-result> </h3>
+          </div>
+          <div class="buttons" >
+      <div *ngIf="selected === stepperPages[stepperPages.length-1].page ;then submitBtn; else cmnBtn">
+     
+    </div>    
+        <ng-template #cmnBtn>
+            <button [hidden]="selected == 1" class="prev" (click)="selected = selected -1">Prev</button>
+            <button class="next" (click)="handleNextPage()">Next</button>
+        </ng-template>
+        <ng-template #submitBtn>
+            <button class="submit" (click)="selected = 1" >Submit</button>
+        </ng-template>
+    </div>
+
+    </div>
+
+</div>
+
+
+
+
