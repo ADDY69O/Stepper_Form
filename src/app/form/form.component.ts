@@ -7,17 +7,22 @@ import { CreativeComponent } from '../creative/creative.component';
 import { FamilyDetailsComponent } from '../family-details/family-details.component';
 import { ResultComponent } from '../result/result.component';
 import { AddressComponent } from '../address/address.component';
+import { CommonComponent } from '../common/common.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule,FormsModule,BasicDetailsComponent,CreativeComponent,FamilyDetailsComponent,ResultComponent,AddressComponent],
+  imports: [CommonModule,FormsModule,BasicDetailsComponent,CreativeComponent,FamilyDetailsComponent,ResultComponent,AddressComponent,CommonComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
 export class FormComponent  {
 
-@ViewChild('basicCmp') basicCmp: BasicDetailsComponent;
+  @ViewChild (BasicDetailsComponent) BasicDetailComponent: BasicDetailsComponent;
+  @ViewChild (FamilyDetailsComponent) FamilyDetailsComponent: FamilyDetailsComponent;
+
+  constructor(private toastr: ToastrService) {}
 
  selected:number =1;
  pages:number[] =[1,2,3,4,5]
@@ -28,6 +33,7 @@ export class FormComponent  {
   {page:4,title:"Address"},
   {page:5,title:"Submission"},
  ]
+ isValid:boolean = false;
 
   data ={
 
@@ -47,11 +53,36 @@ export class FormComponent  {
   this.data.basicDetails = data;
  }
 
+ showFormDetails (data:any){
+  console.log("Inside Parent COmponent")
+  console.log(data);
+ }
 
  handleNextPage = ()=>{
   
   if(this.stepperPages[this.selected-1].title == "Family Details"){
-    this.basicCmp.checkForm();
+    if(this.FamilyDetailsComponent.checkisValid()){
+
+      this.FamilyDetailsComponent.handleFamilyForm();
+    }
+    else{
+      this.toastr.error('Form is not valid','Error');
+      return;
+    }
+  }
+  else if(this.stepperPages[this.selected-1].title == "Basic Details"){
+    if(this.BasicDetailComponent.checkisValid()){
+
+      this.BasicDetailComponent.handleBasicForm();
+    
+
+    }
+    else{
+      this.toastr.error('Form is not valid','Error');
+      console.log("Form is not Valid")
+
+      return;
+    }
   }
   this.selected += 1;
 

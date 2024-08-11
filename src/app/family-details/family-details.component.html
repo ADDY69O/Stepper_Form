@@ -1,3 +1,15 @@
-<p>family-details works!</p>
+<div class="Main__Family">
+    
+    <ng-container  *ngFor="let member of noOfFamilyMemebers; let i = index" >
+        <ng-template #showRemoveButton>
+            <button class="remove" (click)="removeFamilyMember(member)" >Remove</button>
+        </ng-template>
+        
+        <app-common></app-common>
+        
+        <div *ngIf="noOfFamilyMemebers.length > 1; then showRemoveButton" ></div>
+    </ng-container>
+    <button class="add" (click)="addFamilyMember()" >Add</button>
+    <p>family-details works!</p>
+</div>
 
-<app-common ></app-common>

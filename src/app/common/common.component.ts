@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormDataService } from '../form-data.service';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { __values } from 'tslib';
 @Component({
   selector: 'app-common',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './common.component.html',
   styleUrl: './common.component.css'
 })
 export class CommonComponent {
-
+  @ViewChild ('commonForm') Form : NgForm;
   @Output() sendCommonData : EventEmitter<any> = new EventEmitter(); 
 
   constructor (private formService:FormDataService){}
@@ -18,17 +19,19 @@ export class CommonComponent {
 Fname:string;
 Lname:string;
 Phone:number;
-dob:Date;
+dob:string;
 
 ngOnInit (){
+  console.log("called ng init")
   const formData = this.formService?.data?.common;
   if(formData){
     this.Fname = formData?.Fname;
     this.Lname = formData?.Lname;
+    if(formData.Phone !== null){
+      this.Phone = formData?.Phone;
+    }
     if(formData.dob !== null){
-      this.Phone = formData?.Phone;}
-    if(formData.Phone!== null){
-      this.dob = formData?.Phone;
+    this.dob = new Date(formData.dob).toISOString().substring(0, 10);
     }
   }
 }
@@ -55,11 +58,23 @@ consoleCommonFormValues (){
 
 }
 
+checkisValid(){
+  if(this.Form.valid){
+    return true;
+  }
+  return false;
+}
 
-handleCommonForm( Form:NgForm ){
+handleCommonForm(  ){
+  if(this.Form.valid){
 
-  console.log(Form);
-
+    console.log(this.Form.value , "inside common");
+    this.formService.addCommonData(this.Form.value)
+    // this.sendCommonData.emit(this.Form.value);
+  }
+  else{
+    console.log("Form is not valid")
+  }
 
 }
 

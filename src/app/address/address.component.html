@@ -1,1 +1,34 @@
-<p>address works!</p>
+<div class="address-form">
+    <p>Address Works!</p>
+    <form>
+      <div>
+        <label for="">Country</label>
+        <input type="text" name="country" id="country" [(ngModel)]="country" required >
+      </div>
+      <div>
+        <label for="">State</label>
+        <input type="text" name="state" id="state" [(ngModel)]="state" required >
+      </div>
+      <div>
+        <label for="">City</label>
+        <input type="text" name="city" id="city" [(ngModel)]="city" required >
+      </div>
+
+      
+
+      <input
+        type="text"
+        name="inputSearch"
+        [(ngModel)]="inputSearch"
+        id="inputSearch"
+        (input)="handleInputChange()"
+        placeholder="Enter address..."
+      />
+      <div class="searchComplete" *ngIf="autoComplete.length > 0">
+        <ng-container *ngFor="let address of autoComplete">
+          <p class="place" (click)="selectAddress(address)">{{ address.description }}</p>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  

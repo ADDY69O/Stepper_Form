@@ -1,24 +1,6 @@
+<app-common></app-common>
 <div class="basic">
-
-    <form (ngSubmit)="checkForm()"   #basicForm="ngForm">
-
-
-            <div class="input_inline_single">
-                <p>FirstName :</p>
-            
-                <div   class="input_inline_error">
-                    <input type="text" value={{Fname}} name="Fname" id="Fname" placeholder="First Name" [(ngModel)]="Fname" #firstName="ngModel"  required minlength="6">
-                    <small *ngIf = "firstName?.touched && firstName?.invalid" >* Fname is Required</small>
-                    <small *ngIf = "firstName?.errors?.['minlength']" > Minimum 6 Length required for FirstName</small>
-                </div>
-                </div>
-                <div class="input_inline_single">
-                    <p>LastName :</p>
-            
-                    <input type="text" name="Lname" id="Lname" placeholder="Last Name" [(ngModel)]="Lname"  #lastName="ngModel" >
-                </div>
-     
-                
+    <form (ngSubmit)="handleBasicForm()"   #basicForm="ngForm">    
         <div class="input_inline_single">
             <p>Email :</p>
 
@@ -29,15 +11,6 @@
             </div>
         </div>
 
-        <div  class="input_inline_single"> 
-            <p>Phone No.</p>
-            <div  class="input_inline_error">
-                <input type="number" name="Phone" id="Phone" value={{Phone}} placeholder="Enter Phone No." [(ngModel)]="Phone" #phoneNumber="ngModel" required  minlength="10" maxlength="10" >
-                <small *ngIf = "phoneNumber?.touched && phoneNumber?.invalid" >* Phone No is Required</small>
-                <small *ngIf = "phoneNumber?.errors?.['minlength'] || phoneNumber?.errors?.['maxlength']" >10 digit is Required</small>
-            </div>
-            
-        </div>
         
         <div class="input_inline_single">
             
@@ -50,8 +23,7 @@
             </div>
         </div>
 
-        <button type="submit" >NewButton</button>
-
+    
     </form>
     
 </div>

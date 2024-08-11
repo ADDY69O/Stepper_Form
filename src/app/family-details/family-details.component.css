@@ -1,0 +1,26 @@
+.Main__Family{
+
+    overflow-y: scroll;
+    height: 400px;
+}   
+
+
+.add {
+    width: 80px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: #1D64D4;
+    color: white;
+    border: none;
+    margin: 20px 20px 10px 20px;
+}
+
+.remove {
+    width: 80px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: #F0483E;
+    color: white;
+    border: none;
+    margin: 20px 20px 10px 20px;
+}

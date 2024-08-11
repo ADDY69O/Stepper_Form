@@ -2,61 +2,61 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Form, FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { FormDataService } from '../form-data.service';
+import { CommonComponent } from '../common/common.component';
 
 
 
 @Component({
   selector: 'app-basic-details',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,CommonComponent],
   templateUrl: './basic-details.component.html',
   styleUrl: './basic-details.component.css'
 })
 export class BasicDetailsComponent {
 @ViewChild ('basicForm') Form : NgForm;
 
-constructor ( ){}
-@Input() formInfo:any;
+constructor (private formService:FormDataService ){}
 
-@Output() sendFormData : EventEmitter<any> = new EventEmitter();
-Fname:string="";
-Lname:string="";
-Email:string="";
-Phone:number=0;
-Website:string=""
+
+@ViewChild (CommonComponent) commonComponent: CommonComponent;
+
+Email:string;
+Website:string;
 
 ngOnInit() {
-  if(this.formInfo ){
+  console.log("ng init called")
+   const basicData = this.formService.data.basicDetails;
 
-
-    this.Fname = this.formInfo.Fname;
-    this.Lname = this.formInfo.Lname;
-    this.Email = this.formInfo.Email;
-    this.Phone = this.formInfo.Phone;
-    this.Website = this.formInfo.Website;
+    this.Email = basicData.Email;
+    this.Website = basicData.Website;
   }
 
-}
+
+  checkisValid(){
+    if(this.Form.valid && this.commonComponent.checkisValid()){
+      return true;
+    }
+    return false;
+  }
 
 
-
-
-
-
- public checkForm(){
+  handleBasicForm(){
   if (this.Form.valid) {
   console.log(this.Form)
   const data = {
     Email : this.Form?.value?.Email,
-    Fname : this.Form?.value?.Fname,
-    Lname : this.Form?.value?.Lname,
-    Phone : this.Form?.value?.Phone,
     Website : this.Form?.value?.Website,
 
   }
+  this.formService.addBasicData(data);
+  this.commonComponent.handleCommonForm();  
   
-  this.sendFormData.emit(data);
-  }
+}
+else{
+  console.log("form is not valid")
+}
 
 }
 

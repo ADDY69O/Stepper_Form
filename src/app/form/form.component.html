@@ -15,17 +15,22 @@
     <div class="form">
     
         <div class="showDetails" [ngSwitch]="selected">
-            <div *ngSwitchCase="2"  >
+            <div *ngSwitchCase="1"  >
                 <div>
-                    <app-basic-details [formInfo]="data.basicDetails"  (sendFormData)="updateBasicDetails($event)"  ></app-basic-details>
+                    <app-basic-details  ></app-basic-details>
                 </div>
              </div>
-            <h3 *ngSwitchCase="1" >
+            <h3 *ngSwitchCase="2" >
                 <div>
-                    <app-family-details></app-family-details>
+                    <app-family-details></app-family-details>                    
                 </div>
             </h3>
-            <h3 *ngSwitchCase="3" > <app-creative></app-creative> </h3>
+            <h3 *ngSwitchCase="3" >
+                <div>
+                    <app-creative></app-creative> 
+                </div>
+            </h3>
+            
             <h3 *ngSwitchCase="4" ><app-address></app-address> </h3>
             <h3 *ngSwitchCase="5" ><app-result></app-result> </h3>
           </div>

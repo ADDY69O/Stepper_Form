@@ -8,13 +8,14 @@ export class FormDataService {
 
   constructor() { }
 
+
   public data = {
 
     common:{
       Fname:"",
       Lname:"",
       Phone:null,
-      dob:""
+      dob:null
     },
 
     basicDetails : {
@@ -42,12 +43,24 @@ export class FormDataService {
       state:"",
       country:"",
       pincode:null,
-      
-
-    }
 
 
-
-    
+    }   
 }
+
+ addCommonData = (data:any)=>{
+  this.data.common=data;
+
+  console.log(this.data.common)
+  console.log(typeof data.dob)
+}
+
+
+ addBasicData = (data:any)=>{
+  this.data.basicDetails=data;
+
+  console.log(this.data.basicDetails)
+}
+
+
 }

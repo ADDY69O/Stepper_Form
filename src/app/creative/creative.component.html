@@ -1,1 +1,25 @@
-<p>creative works!</p>
+<div class="Main__Creative">
+    <h1 class="title">Upload Photos of Family Members</h1>
+    <ng-container *ngFor="let member of familyDetails">
+        <div class="oneMember">   
+            <span class="title__name" > <h1 class="name"> {{member.relation}}  </h1> <p class="relation"> {{member.Fname}} </p></span>
+       
+      
+      <div class="input">
+       
+    
+        <label [for]="member.Fname" >
+             Upload
+         </label>
+         <input type="file" [name]="member.Fname" [id]="member.Fname"  type="file"
+         [name]="member.Fname"
+         [id]="member.Fname"
+         (change)="addPhoto(member.Fname, $event)"
+           #file>
+
+      </div> 
+        
+        </div>
+    </ng-container>
+</div>
+
