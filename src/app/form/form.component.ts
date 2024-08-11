@@ -29,11 +29,11 @@ export class FormComponent  {
  selected:number =1;
  pages:number[] =[1,2,3,4,5]
  stepperPages:pageType[]=[
-  {page:1,title:"Basic Details"},
-  {page:2,title:"Family Details"},
-  {page:3,title:"Creative"},
-  {page:4,title:"Address"},
-  {page:5,title:"Submission"},
+  {page:1,title:"Basic Details",editable:false},
+  {page:2,title:"Family Details",editable:false},
+  {page:3,title:"Creative",editable:false},
+  {page:4,title:"Address",editable:false},
+  {page:5,title:"Submission",editable:false},
  ]
  isValid:boolean = false;
 
@@ -60,7 +60,7 @@ export class FormComponent  {
   console.log(data);
  }
 
- handleNextPage = ()=>{
+ handleNextPage = (submit:boolean =false)=>{
   
   if(this.stepperPages[this.selected-1].title == "Family Details"){
     if(this.FamilyDetailsComponent.checkisValid()){
@@ -102,10 +102,38 @@ export class FormComponent  {
     }
     
   }
- 
+ if(!submit){
   this.selected += 1;
+ }
+ else{
+  this.selected = this.stepperPages.length;
+  this.toastr.success("Successfully saved the changes","Success");
+ }
+
+ }
+
+ changePage(page:number){
+  console.log(page)
+ 
+    this.stepperPages[page-1].editable = true;
+    this.selected =page;
+    console.log(this.stepperPages)
+    this.toastr.success('Successfully switched to page '+ page,'Success');
+
+ }
+
+ handleFormSubmit(){
+  if(this.selected !== this.stepperPages.length){
+    
+    this.handleNextPage(true);
+
+    
 
 
+  }
+  else{
+    this.toastr.success("Form Filled Successfully","Success");
+  }
  }
 
 

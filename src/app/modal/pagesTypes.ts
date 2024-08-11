@@ -1,6 +1,7 @@
 export type pageType ={
     page:number,
-    title:string
+    title:string,
+    editable:boolean
 }
 
 export type BasicDetailTypes ={
