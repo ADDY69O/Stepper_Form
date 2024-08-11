@@ -24,7 +24,7 @@
         </div>
         <div *ngSwitchCase="5">
           <ng-container *ngFor="let page of stepperPages">
-            <div *ngIf="page.page !== stepperPages.length">
+            <div *ngIf="page.page !== stepperPages.length" class="ChangeSinglePage">
               <h1>{{ page.title }}</h1>
               <button (click)="changePage(page.page)">Change</button>
             </div>
@@ -32,13 +32,12 @@
         </div>
       </div>
       <div class="buttons">
-        <!-- Common Buttons -->
+     
         <ng-container *ngIf="selected < stepperPages.length">
           <button *ngIf= "!stepperPages[selected - 1].editable && selected > 1" class="prev" (click)=" selected =  selected - 1">Prev</button>
           <button *ngIf="!stepperPages[selected - 1].editable" class="next" (click)="handleNextPage()">Next</button>
         </ng-container>
   
-        <!-- Submit Button -->
         <ng-container *ngIf="selected === stepperPages.length">
           <button  class="submit" (click)="handleFormSubmit()">Submit</button>
         </ng-container>

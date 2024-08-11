@@ -9,6 +9,7 @@ import { ResultComponent } from '../result/result.component';
 import { AddressComponent } from '../address/address.component';
 import { CommonComponent } from '../common/common.component';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -24,7 +25,7 @@ export class FormComponent  {
   @ViewChild (CreativeComponent) CreativeComponent: CreativeComponent;
   @ViewChild (AddressComponent) AddressComponent: AddressComponent;
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService,private router: Router) {}
 
  selected:number =1;
  pages:number[] =[1,2,3,4,5]
@@ -133,6 +134,7 @@ export class FormComponent  {
   }
   else{
     this.toastr.success("Form Filled Successfully","Success");
+    this.router.navigate(['/submit'])
   }
  }
 
