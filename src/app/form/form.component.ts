@@ -79,6 +79,7 @@ export class FormComponent  {
 
     }
     else{
+      this.BasicDetailComponent.handleBasicForm();
       this.toastr.error('Form is not valid','Error');
       console.log("Form is not Valid")
 

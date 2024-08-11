@@ -55,6 +55,7 @@ export class FamilyDetailsComponent {
   }
 
   handleFamilyForm() {
+    
     this.noOfFamilyMemebers.forEach((member, index) => {
       this.formService.addFamilyData(index, member);
     });

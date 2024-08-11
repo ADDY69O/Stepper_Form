@@ -71,6 +71,11 @@ export class CommonComponent {
     if (this.Form.valid) {
       this.formService.addCommonData(this.Form.value);
     } else {
+      Object.keys(this.Form.controls).forEach(field => {
+        const control = this.Form.controls[field];
+        control.markAsTouched({ onlySelf: true });
+      });
+      console.log('Form is not valid');
       console.log('Form is not valid');
     }
   }

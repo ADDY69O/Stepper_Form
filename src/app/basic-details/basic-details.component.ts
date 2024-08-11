@@ -55,6 +55,12 @@ ngOnInit() {
   
 }
 else{
+  console.log(this.Form.controls)
+  Object.keys(this.Form.controls).forEach(field => {
+    let control = this.Form.controls[field];
+    control.markAsTouched({ onlySelf: true });
+  });
+  this.commonComponent.handleCommonForm();
   console.log("form is not valid")
 }
 
