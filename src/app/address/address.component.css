@@ -59,3 +59,11 @@
   
 
   
+input.ng-invalid.ng-touched{
+  border:2px solid red;
+
+}
+small, .error{
+  font-size: 12px;
+  color: red;
+}

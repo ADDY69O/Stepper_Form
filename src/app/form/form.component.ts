@@ -22,6 +22,7 @@ export class FormComponent  {
   @ViewChild (BasicDetailsComponent) BasicDetailComponent: BasicDetailsComponent;
   @ViewChild (FamilyDetailsComponent) FamilyDetailsComponent: FamilyDetailsComponent;
   @ViewChild (CreativeComponent) CreativeComponent: CreativeComponent;
+  @ViewChild (AddressComponent) AddressComponent: AddressComponent;
 
   constructor(private toastr: ToastrService) {}
 
@@ -67,6 +68,7 @@ export class FormComponent  {
       this.FamilyDetailsComponent.handleFamilyForm();
     }
     else{
+      this.FamilyDetailsComponent.handleFamilyForm();
       this.toastr.error('Form is not valid','Error');
       return;
     }
@@ -85,6 +87,20 @@ export class FormComponent  {
 
       return;
     }
+  }
+  else if(this.stepperPages[this.selected-1].title == "Creative"){
+    if(!this.CreativeComponent.validatePhotos()){
+      this.toastr.error('Required to upload all of the photos','Error');
+      return;
+    }
+    
+  }
+  else if(this.stepperPages[this.selected-1].title == "Address"){
+    if(!this.AddressComponent.validateAddress()){
+      this.toastr.error('Required to select the address','Error');
+      return;
+    }
+    
   }
  
   this.selected += 1;

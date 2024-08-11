@@ -80,6 +80,13 @@ export class CommonComponent {
     }
   }
 
+  showError (){
+    Object.keys(this.Form.controls).forEach(field => {
+      const control = this.Form.controls[field];
+      control.markAsTouched({ onlySelf: true });
+    });
+  }
+
   handleCommonFamilyForm() {
     if (this.checkisValid()) {
       const data = {
@@ -91,6 +98,10 @@ export class CommonComponent {
       console.log(data + "within Common Module") 
       this.sendCommonData.emit(data);
     } else {
+      Object.keys(this.Form.controls).forEach(field => {
+        const control = this.Form.controls[field];
+        control.markAsTouched({ onlySelf: true });
+      });
       console.log('Form is not valid');
     }
   }

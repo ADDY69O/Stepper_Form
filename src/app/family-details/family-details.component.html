@@ -1,23 +1,34 @@
 <div class="Main__Family">
-    <ng-container *ngFor="let member of noOfFamilyMemebers; let i = index">
-      <ng-template #showRemoveButton>
-        <button class="remove" (click)="removeFamilyMember(i)">Remove</button>
-      </ng-template>
-  
-      <app-common [member]="member" [memberIndex]="i" (sendCommonData)="updateFamilyMemberData(i, $event)" ></app-common>
-  
-      <div>
-        <label for="relation">Relation</label>
-        <input
-          type="text"
-          name="relation"
-          id="relation"
-          [(ngModel)]="member.relation"
-        />
+  <ng-container *ngFor="let member of noOfFamilyMemebers; let i = index">
+    <ng-template #showRemoveButton>
+      <button class="remove" (click)="removeFamilyMember(i)">Remove</button>
+    </ng-template>
+
+    <app-common
+      [member]="member"
+      [memberIndex]="i"
+      (sendCommonData)="updateFamilyMemberData(i, $event)"
+    ></app-common>
+
+    <div>
+      <label for="relation">Relation</label>
+      <input
+        #relationInput
+        type="text"
+        name="relation"
+        id="relation"
+        [(ngModel)]="member.relation"
+        required
+        #relation="ngModel"
+      />
+      <!-- Error message for invalid input -->
+      <div *ngIf="relation.invalid && (relation.dirty || relation.touched)" class="error">
+        Relation is required.
       </div>
-  
-      <div *ngIf="noOfFamilyMemebers.length > 1; then showRemoveButton"></div>
-    </ng-container>
-    <button class="add" (click)="addFamilyMember()">Add</button>
-  </div>
-  
+
+    </div>
+
+    <div *ngIf="noOfFamilyMemebers.length > 1; then showRemoveButton"></div>
+  </ng-container>
+  <button class="add" (click)="addFamilyMember()">Add</button>
+</div>

@@ -1,6 +1,6 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewChildren, QueryList, ElementRef, Renderer2 } from '@angular/core';
 import { CommonComponent } from '../common/common.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormDataService } from '../form-data.service';
 
@@ -21,13 +21,14 @@ interface FamilyMember {
 })
 export class FamilyDetailsComponent {
   @ViewChildren(CommonComponent) commonComponents: QueryList<CommonComponent>;
+  @ViewChildren('relationInput') relationInputs: QueryList<ElementRef>;
 
   noOfFamilyMemebers: FamilyMember[] = [];
 
-  constructor(private formService: FormDataService) {}
+  constructor(private formService: FormDataService, private renderer: Renderer2) {}
 
   ngOnInit() {
-    this.noOfFamilyMemebers = this.formService.data.familyDetails;
+    this.noOfFamilyMemebers = this.formService.data.familyDetails || [];
   }
 
   addFamilyMember() {
@@ -55,17 +56,35 @@ export class FamilyDetailsComponent {
   }
 
   handleFamilyForm() {
-    
-    this.noOfFamilyMemebers.forEach((member, index) => {
-      this.formService.addFamilyData(index, member);
-    });
-  
-    console.log('All family data saved:', this.formService.data.familyDetails);
-    
-    // Call handleCommonFamilyForm for each component
-    this.commonComponents.forEach((component) => component.handleCommonFamilyForm());
+    console.log(this.relationInputs);
+    // Ensure relation fields are marked as touched to trigger validation
+    if (this.relationInputs) {
+      this.relationInputs.forEach((relationInput) => {
+        const element = relationInput.nativeElement;
+        const relationValue = element.value;
 
-    
+        if (!relationValue) {
+          // Mark the input as touched using Renderer2
+          this.renderer.addClass(element, 'ng-touched');
+          this.renderer.addClass(element, 'ng-invalid');
+        }
+      });
+    }
+
+    const allValid = this.checkisValid() && this.noOfFamilyMemebers.every((member) => !!member.relation);
+
+    if (allValid) {
+      this.noOfFamilyMemebers.forEach((member, index) => {
+        this.formService.addFamilyData(index, member);
+      });
+      console.log('All family data saved:', this.formService.data.familyDetails);
+      
+      // Call handleCommonFamilyForm for each component
+      this.commonComponents.forEach((component) => component.handleCommonFamilyForm());
+    } else {
+      this.commonComponents.forEach((component) => component.showError());
+      console.log('Form is not valid');
+    }
   }
 
   updateFamilyMemberData(index: number, data: Partial<FamilyMember>) {
