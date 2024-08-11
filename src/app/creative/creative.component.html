@@ -1,25 +1,26 @@
 <div class="Main__Creative">
-    <h1 class="title">Upload Photos of Family Members</h1>
-    <ng-container *ngFor="let member of familyDetails">
-        <div class="oneMember">   
-            <span class="title__name" > <h1 class="name"> {{member.relation}}  </h1> <p class="relation"> {{member.Fname}} </p></span>
-       
-      
-      <div class="input">
-       
-    
-        <label [for]="member.Fname" >
-             Upload
-         </label>
-         <input type="file" [name]="member.Fname" [id]="member.Fname"  type="file"
-         [name]="member.Fname"
-         [id]="member.Fname"
-         (change)="addPhoto(member.Fname, $event)"
-           #file>
-
-      </div> 
-        
+  <h1 class="title">Upload Photos of Family Members</h1>
+  <ng-container *ngFor="let member of familyDetails">
+    <div class="oneMember">
+      <span class="title__name">
+        <h1 class="name">{{member.relation}}</h1>
+        <p class="relation">{{member.Fname}} {{member.Lname}}</p>
+      </span>
+      <div class="input" *ngIf="!getUploadedFile(member.Fname)">
+        <label [for]="member.Fname">Upload</label>
+        <input
+          type="file"
+          [name]="member.Fname"
+          [id]="member.Fname"
+          (change)="addPhoto(member.Fname, $event)"
+        />
+      </div>
+      <ng-container *ngIf="getUploadedFile(member.Fname)">
+        <div class="uploaded-file">
+          <p class="file-name">{{ getUploadedFile(member.Fname)?.name }}</p>
+          <button class="remove-button" (click)="removePhoto(member.Fname)">Remove</button>
         </div>
-    </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
 </div>
-

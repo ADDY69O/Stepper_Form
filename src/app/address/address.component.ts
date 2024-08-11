@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { ApiPostService } from '../services/api-calling.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormDataService } from '../form-data.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddressComponent {
 
-  constructor(private ApiService:ApiPostService,private toastr: ToastrService){}
+  constructor(private ApiService:ApiPostService,private toastr: ToastrService,private formService: FormDataService){}
 
   inputSearch:string;
   autoComplete : any[] = [];
@@ -24,6 +25,12 @@ export class AddressComponent {
   state:string;
   city:string;
 
+  ngOnInit (){
+    let data = this.formService.data.address;
+    this.country = data.country;
+    this.state = data.state;
+    this.city = data.city;
+  }
 
   handleInputChange (){
     console.log(this.inputSearch);
@@ -50,10 +57,11 @@ export class AddressComponent {
       this.toastr.success('Successfully selected ','Success');
       this.country = newArray[newArray.length-1];
       this.state = newArray[newArray.length-2];
-
       let cityArray = newArray.slice(0, newArray.length-2);
-
       this.city = cityArray.join();
+      this.formService.addAddress(this.country,this.city,this.state)
+
+
 
 
     }

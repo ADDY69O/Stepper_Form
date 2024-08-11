@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,59 +7,60 @@ export class FormDataService {
 
   constructor() { }
 
-
   public data = {
-
-    common:{
-      Fname:"",
-      Lname:"",
-      Phone:null,
-      dob:null
-    },
-
-    basicDetails : {
-        Email:"",
-        Website:""
-    },
-    familyDetails:[
-      {
-        Fname:"",
-        Lname:"",
-        Phone:null,
-        dob:""
-      }
+    common: { Fname: "", Lname: "", Phone: null, dob: null },
+    basicDetails: { Email: "", Website: "" },
+    familyDetails: [
+      { Fname: "", Lname: "", Phone: null, dob: "", relation: "" }
     ],
-    creative:[
-      {
-        firstName:"",
-        lastName:"",
-        image:""
-      }
-
+    creative: [
+      { firstName: "", image: "" } // Adjusted to match with CreativeComponent
     ],
-    address:{
-      city:"",
-      state:"",
-      country:"",
-      pincode:null,
+    address: { city: "", state: "", country: "" }
+  };
 
+  addCommonData(data: any) {
+    this.data.common = data;
+    console.log(this.data.common);
+  }
 
-    }   
-}
+  addBasicData(data: any) {
+    this.data.basicDetails = data;
+    console.log(this.data.basicDetails);
+  }
 
- addCommonData = (data:any)=>{
-  this.data.common=data;
+  addFamilyData(index: number, data: any) {
+    if (this.data.familyDetails[index]) {
+      this.data.familyDetails[index] = data;
+    } else {
+      this.data.familyDetails.push(data);
+    }
+    console.log(this.data.familyDetails);
+  }
 
-  console.log(this.data.common)
-  console.log(typeof data.dob)
-}
+  addCreativePicture(name: string, file: File) {
+    const imageUrl = URL.createObjectURL(file);
+    const index = this.data.creative.findIndex(c => c.firstName === name);
+    if (index > -1) {
+      this.data.creative[index] = { firstName: name, image: imageUrl };
+    } else {
+      this.data.creative.push({ firstName: name, image: imageUrl });
+    }
+    console.log(this.data.creative)
+  }
 
+  addAddress (country: string, city: string, state: string){
+    this.data.address.city = city;
+    this.data.address.country = country;
+    this.data.address.state = state;
 
- addBasicData = (data:any)=>{
-  this.data.basicDetails=data;
+  }
 
-  console.log(this.data.basicDetails)
-}
+  removeCreativePicture(name: string) {
+    this.data.creative = this.data.creative.filter(c => c.firstName !== name);
+  }
 
-
+  getCreativePictures() {
+    return this.data.creative;
+  }
 }

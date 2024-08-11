@@ -1,53 +1,46 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { fakeAsync } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormDataService } from '../form-data.service';
 
 @Component({
   selector: 'app-creative',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './creative.component.html',
-  styleUrl: './creative.component.css'
+  styleUrls: ['./creative.component.css']
 })
-export class CreativeComponent {
+export class CreativeComponent implements OnInit {
 
-  familyDetails = [
-    { Fname:"Mehra",
-      Lname:"Kr",
-      Phone:1234567890,
-      dob:"13-01-2001",
-      relation:"Father"
-    },
-    {
-      Fname:"Riya",
-      Lname:"Jain",
-      phone:1234567890,
-      dob:"13-01-2001",
-      relation:"Mother"
-    },
-    {
-      Fname:"Sophia",
-      Lname:"Neph",
-      phone:1234567890,
-      dob:"13-01-2001",
-      relation:"Sister"
-    }
+  familyDetails = [];
+  creative = [];
 
-  ]
+  constructor(private formDataService: FormDataService) {}
 
-
-
-  creative =[
-
-  ]
-
-
-  addPhoto=(name:string,file:any)=>{
-    console.log("inside")
-    console.log(file);
-    this.creative.push({"name":name,file:file});
+  ngOnInit() {
+    this.familyDetails = this.formDataService.data.familyDetails;
+    this.creative = this.formDataService.getCreativePictures(); 
+    console.log('Creative Pictures:', this.creative);
   }
 
+  addPhoto(name: string, event: any) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      console.log("Uploading file:", file);
+      this.formDataService.addCreativePicture(name, file);
+      this.creative = this.formDataService.getCreativePictures(); // Refresh creative array from service
+    }
+  }
 
+  getUploadedFile(name: string) {
+    console.log(this.creative)
+    const data = this.creative.find(c => c.firstName === name)?.image || null;
+    console.log(data);
+    return data;
+  }
+
+  removePhoto(name: string) {
+    this.formDataService.removeCreativePicture(name);
+    this.creative = this.formDataService.getCreativePictures(); // Refresh creative array from service
+  }
 }

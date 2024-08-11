@@ -21,6 +21,7 @@ export class FormComponent  {
 
   @ViewChild (BasicDetailsComponent) BasicDetailComponent: BasicDetailsComponent;
   @ViewChild (FamilyDetailsComponent) FamilyDetailsComponent: FamilyDetailsComponent;
+  @ViewChild (CreativeComponent) CreativeComponent: CreativeComponent;
 
   constructor(private toastr: ToastrService) {}
 
@@ -84,6 +85,7 @@ export class FormComponent  {
       return;
     }
   }
+ 
   this.selected += 1;
 
 

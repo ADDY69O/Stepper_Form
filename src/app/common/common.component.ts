@@ -1,81 +1,92 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormDataService } from '../form-data.service';
 import { FormsModule, NgForm } from '@angular/forms';
-import { __values } from 'tslib';
+
 @Component({
   selector: 'app-common',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './common.component.html',
-  styleUrl: './common.component.css'
+  styleUrls: ['./common.component.css']
 })
 export class CommonComponent {
-  @ViewChild ('commonForm') Form : NgForm;
-  @Output() sendCommonData : EventEmitter<any> = new EventEmitter(); 
+  @ViewChild('commonForm') Form: NgForm;
+  @Input() member: any;
+  @Input() memberIndex: number;
+  @Output() sendCommonData: EventEmitter<any> = new EventEmitter();
 
-  constructor (private formService:FormDataService){}
+  constructor(private formService: FormDataService) {}
 
-Fname:string;
-Lname:string;
-Phone:number;
-dob:string;
+  Fname: string;
+  Lname: string;
+  Phone: number;
+  dob: string;
 
-ngOnInit (){
-  console.log("called ng init")
-  const formData = this.formService?.data?.common;
-  if(formData){
-    this.Fname = formData?.Fname;
-    this.Lname = formData?.Lname;
-    if(formData.Phone !== null){
-      this.Phone = formData?.Phone;
+  ngOnInit() {
+    if (this.member) {
+      this.Fname = this.member.Fname;
+      this.Lname = this.member.Lname;
+      this.Phone = this.member.Phone;
+      if (this.member.dob) {
+        const dobDate = new Date(this.member.dob);
+        if (!isNaN(dobDate.getTime())) {  // Check if the date is valid
+          this.dob = dobDate.toISOString().substring(0, 10);
+        } else {
+          this.dob = '';  // Handle invalid date case
+        }
+      } else {
+        this.dob = '';  // Handle undefined or empty dob
+      }
     }
-    if(formData.dob !== null){
-    this.dob = new Date(formData.dob).toISOString().substring(0, 10);
+    else{
+     let commonData = this.formService.data.common;
+      this.Fname = commonData.Fname;
+      this.Lname = commonData.Lname;
+      this.Phone = commonData.Phone;
+      if(commonData.dob){
+        this.dob = new Date(commonData.dob).toISOString().substring(0, 10);
+      }
+      else{
+        this.dob = "";
+      }
     }
   }
-}
 
-
-
-consoleCommonFormValues (){
-  
-  console.log(this.Fname)
-  console.log(this.Lname)
-  console.log(this.Phone)
-  console.log(this.dob)
-  const data ={
-    Fname:this.Fname,
-    Lname:this.Lname,
-    Phone:this.Phone,
-    dob:this.dob
+  consoleCommonFormValues() {
+    const data = {
+      Fname: this.Fname,
+      Lname: this.Lname,
+      Phone: this.Phone,
+      dob: this.dob
+    };
+    this.sendCommonData.emit(data);
   }
 
-
-  this.sendCommonData.emit(data);
-
-
-
-}
-
-checkisValid(){
-  if(this.Form.valid){
-    return true;
-  }
-  return false;
-}
-
-handleCommonForm(  ){
-  if(this.Form.valid){
-
-    console.log(this.Form.value , "inside common");
-    this.formService.addCommonData(this.Form.value)
-    // this.sendCommonData.emit(this.Form.value);
-  }
-  else{
-    console.log("Form is not valid")
+  checkisValid() {
+    return this.Form.valid;
   }
 
-}
+  handleCommonForm() {
+    if (this.Form.valid) {
+      this.formService.addCommonData(this.Form.value);
+    } else {
+      console.log('Form is not valid');
+    }
+  }
 
+  handleCommonFamilyForm() {
+    if (this.checkisValid()) {
+      const data = {
+        Fname: this.Fname,
+        Lname: this.Lname,
+        Phone: this.Phone,
+        dob: this.dob
+      };
+      console.log(data + "within Common Module") 
+      this.sendCommonData.emit(data);
+    } else {
+      console.log('Form is not valid');
+    }
+  }
 }
