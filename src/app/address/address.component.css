@@ -18,7 +18,7 @@
   }
   
   input[type='text'] {
-    width: 100%;
+    width: 89%;
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -29,6 +29,10 @@
   
   input[type='text']:focus {
     border-color: #007bff;
+  }
+
+  #inputSearch{
+    margin-top: 15px;
   }
   
   .searchComplete {

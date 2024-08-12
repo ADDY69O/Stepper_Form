@@ -1,37 +1,70 @@
-    .input_inline{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 20px;
-    }
-    .input_inline_single{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
-    input{
-        width: max-content;
-        height: 29px;
-        margin-top: 17px;
-    }
+* {
+  margin: 0;
+  padding: 0;
+}
 
-    p{
-        margin-top: 10px;
-        
-    }
+.appMain {
+  width: 100vw;
+  height: 100vh;
+}
 
-    input.ng-invalid.ng-touched{
-        border:2px solid red;
-   
-    }
-    small{
-        color: red;
-    }
-    
-    .input_inline_error{
-        display: flex;
-        flex-direction: column;
-    }
+nav {
+  width: 100%;
+  height: var(--nav-height);
+  background-color: white;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: var(--logo-padding);
+  border-bottom: var(--logo-border-bottom);
+}
+
+.logo__main {
+  color: black;
+  font-family: var(--font-family-main);
+  font-size: var(--logo-font-size);
+}
+
+.input_inline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-small);
+}
+
+.input_inline_single {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+input {
+  width: max-content;
+  height: var(--input-height);
+  margin-top: var(--input-margin-top);
+}
+
+p {
+  margin-top: var(--p-margin-top);
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid var(--error-color);
+}
+
+small {
+  color: var(--error-color);
+}
+
+.input_inline_error {
+  display: flex;
+  flex-direction: column;
+}

@@ -10,20 +10,22 @@
       (sendCommonData)="updateFamilyMemberData(i, $event)"
     ></app-common>
 
-    <div>
+    <div class="relation">
       <label for="relation">Relation</label>
-      <input
-        #relationInput
-        type="text"
-        name="relation"
-        id="relation"
-        [(ngModel)]="member.relation"
-        required
-        #relation="ngModel"
-      />
-      <!-- Error message for invalid input -->
-      <div *ngIf="relation.invalid && (relation.dirty || relation.touched)" class="error">
-        Relation is required.
+      <div class="relation__input">
+        <input
+          #relationInput
+          type="text"
+          name="relation"
+          id="relation"
+          [(ngModel)]="member.relation"
+          required
+          #relation="ngModel"
+        />
+        <!-- Error message for invalid input -->
+        <div *ngIf="relation.invalid && (relation.dirty || relation.touched)" class="error">
+          Relation is required.
+        </div>
       </div>
 
     </div>

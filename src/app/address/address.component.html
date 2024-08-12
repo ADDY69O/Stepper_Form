@@ -1,5 +1,5 @@
 <div class="address-form">
-  <p>Address Works!</p>
+  <p>Address Details !</p>
   <form (ngSubmit)="validateAddress()"  #address="ngForm">
     <div>
       <label for="country">Country</label>
@@ -10,6 +10,7 @@
         [(ngModel)]="country"
         required
         #countryInput="ngModel"
+        disabled
       />
       <div *ngIf="countryInput.invalid && countryInput.touched" class="error">
         Country is required.
@@ -25,6 +26,7 @@
         [(ngModel)]="state"
         required
         #stateInput="ngModel"
+        disabled
       />
       <div *ngIf="stateInput.invalid && stateInput.touched" class="error">
         State is required.
@@ -40,6 +42,7 @@
         [(ngModel)]="city"
         required
         #cityInput="ngModel"
+        disabled
       />
       <div *ngIf="cityInput.invalid && cityInput.touched" class="error">
         City is required.

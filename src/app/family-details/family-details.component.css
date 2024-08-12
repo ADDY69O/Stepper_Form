@@ -1,43 +1,57 @@
-.Main__Family{
-
+.Main__Family {
     overflow-y: scroll;
-    height: 300px;
-}   
-
-
-.add {
-    width: 80px;
-    height: 40px;
-    border-radius: 12px;
-    background-color: #1D64D4;
+    height: var(--scroll-height);
+  }
+  
+  .add {
+    width: var(--button-width);
+    height: var(--button-height);
+    border-radius: var(--button-border-radius);
+    background-color: var(--add-button-bg);
     color: white;
     border: none;
-    margin: 20px 20px 10px 20px;
-}
+    margin: var(--margin-small) var(--margin-small) var(--margin-medium) var(--margin-small);
+  }
+  
+  .remove {
+    width: var(--button-width);
+    height: var(--button-height);
+    border-radius: var(--button-border-radius);
+    background-color: var(--remove-button-bg);
+    color: white;
+    border: none;
+    margin: var(--margin-small) var(--margin-small) var(--margin-medium) var(--margin-small);
+  }
 
-input.ng-invalid.ng-touched{
-    border:2px solid red;
+  .relation {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
 
-}
+  .relation label{
+    font-size: 17px;
+  }
 
-small , .error{
-    font-size: 12px;
-    color: red;
-}
-
-.input_inline_error{
+  .relation__input{
     display: flex;
     flex-direction: column;
-   
-
-}
-
-.remove {
-    width: 80px;
-    height: 40px;
-    border-radius: 12px;
-    background-color: #F0483E;
-    color: white;
-    border: none;
-    margin: 20px 20px 10px 20px;
-}
+    gap: 7px;
+  }
+  
+  input.ng-invalid.ng-touched {
+    border: 2px solid var(--error-color);
+  }
+  
+  small, .error {
+    font-size: var(--font-size-small);
+    color: var(--error-color);
+  }
+  
+  .input_inline_error {
+    display: flex;
+    flex-direction: column;
+  }
+  

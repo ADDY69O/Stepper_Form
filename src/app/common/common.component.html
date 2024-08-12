@@ -1,44 +1,91 @@
+<!-- <form (ngSubmit)="handleCommonForm()" #commonForm="ngForm">
+  <app-common-input
+    label="FirstName"
+    type="text"
+    name="Fname"
+    placeholder="First Name"
+    [(ngModel)]="Fname" 
+    [required]="true"
+    [minlength]="6"
+    errorMessage="* Fname is Required"
+    lengthErrorMessage="Minimum 6 Length required for FirstName"
+  ></app-common-input>
+
+  <app-common-input
+    label="LastName"
+    type="text"
+    name="Lname"
+    placeholder="Last Name"
+    [(ngModel)]="Lname" 
+  ></app-common-input>
+
+  <app-common-input
+    label="Phone No."
+    type="number"
+    name="Phone"
+    placeholder="Enter Phone No."
+    [(ngModel)]="Phone" 
+    [required]="true"
+    [minlength]="10"
+    [maxlength]="10"
+    errorMessage="* Phone No is Required"
+    lengthErrorMessage="10 digit is Required"
+  ></app-common-input>
+
+  <app-common-input
+    label="D.O.B"
+    type="date"
+    name="dob"
+    placeholder="Date of Birth"
+    [(ngModel)]="dob" 
+    [required]="true"
+    errorMessage="* Date of Birth is Required"
+  ></app-common-input>
+
+  <button type="submit">Submit</button>
+</form> -->
+
+
 <div>
 
     
-    <form  (ngSubmit)="handleCommonForm()"  #commonForm="ngForm" >
-        
-        
-        <div class="input_inline_single">
-            <h1>FirstName :</h1>
-            
-            <div   class="input_inline_error">
-                <input type="text" value={{Fname}} name="Fname" id="Fname" placeholder="First Name" [(ngModel)]="Fname" #firstName="ngModel"  required minlength="6">
-                <small *ngIf = "firstName?.touched && firstName?.invalid" >* Fname is Required</small>
-                <small *ngIf = "firstName?.errors?.['minlength']" > Minimum 6 Length required for FirstName</small>
-            </div>
-        </div>
-        <div class="input_inline_single">
-            <h1>LastName :</h1>
-            
-            <input type="text" name="Lname" id="Lname" placeholder="Last Name" [(ngModel)]="Lname"  #lastName="ngModel" >
-        </div>
-        
-        <div  class="input_inline_single"> 
-            <h1>Phone No.</h1>
-            <div  class="input_inline_error">
-                <input type="number" name="Phone" id="Phone" value={{Phone}} placeholder="Enter Phone No." [(ngModel)]="Phone" #phoneNumber="ngModel" required  minlength="10" maxlength="10" >
-                <small *ngIf = "phoneNumber?.touched && phoneNumber?.invalid" >* Phone No is Required</small>
-                <small *ngIf = "phoneNumber?.errors?.['minlength'] || phoneNumber?.errors?.['maxlength']" >10 digit is Required</small>
-            </div>
-        </div>
-        
-        <div  class="input_inline_single"> 
-        <h1>D.O.B </h1>
-        <div  class="input_inline_error">
-            <input type="date" name="dob" id="dob" value={{dob}}  [(ngModel)]="dob" #dateOfBirth="ngModel" required   >
-            <small *ngIf = "dateOfBirth?.touched && dateOfBirth?.invalid" >* Date of Birth is Required</small>
-        </div>
-    </div>
-    
-    
-    
+  <form  (ngSubmit)="handleCommonForm()"  #commonForm="ngForm" >
+      
+      
+      <div class="input_inline_single">
+          <h1>FirstName :</h1>
+          
+          <div   class="input_inline_error">
+              <input type="text" value={{Fname}} name="Fname" id="Fname" placeholder="First Name" [(ngModel)]="Fname" #firstName="ngModel"  required minlength="6">
+              <small *ngIf = "firstName?.touched && firstName?.invalid" >* Fname is Required</small>
+              <small *ngIf = "firstName?.errors?.['minlength']" > Minimum 6 Length required for FirstName</small>
+          </div>
+      </div>
+      <div class="input_inline_single">
+          <h1>LastName :</h1>
+          
+          <input type="text" name="Lname" id="Lname" placeholder="Last Name" [(ngModel)]="Lname"  #lastName="ngModel" >
+      </div>
+      
+      <div  class="input_inline_single"> 
+          <h1>Phone No.</h1>
+          <div  class="input_inline_error">
+              <input type="number" name="Phone" id="Phone" value={{Phone}} placeholder="Enter Phone No." [(ngModel)]="Phone" #phoneNumber="ngModel" required  minlength="10" maxlength="10" >
+              <small *ngIf = "phoneNumber?.touched && phoneNumber?.invalid" >* Phone No is Required</small>
+              <small *ngIf = "phoneNumber?.errors?.['minlength'] || phoneNumber?.errors?.['maxlength']" >10 digit is Required</small>
+          </div>
+      </div>
+      
+      <div  class="input_inline_single"> 
+      <h1>D.O.B </h1>
+      <div  class="input_inline_error">
+          <input type="date" name="dob" id="dob" value={{dob}}  [(ngModel)]="dob" #dateOfBirth="ngModel" required   >
+          <small *ngIf = "dateOfBirth?.touched && dateOfBirth?.invalid" >* Date of Birth is Required</small>
+      </div>
+  </div>
+  
+  
+  
 </form>
 </div>
-
 

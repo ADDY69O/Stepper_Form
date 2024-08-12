@@ -1,0 +1,17 @@
+<div class="input_inline_single">
+  <h1>{{ label }} :</h1>
+  <div class="input_inline_error">
+    <input
+      [type]="type"
+      [name]="name"
+      [placeholder]="placeholder"
+      [(ngModel)]="model"
+      [required]="required"
+      [attr.minlength]="minlength"
+      [attr.maxlength]="maxlength"
+      #ctrl="ngModel"
+    />
+    <small *ngIf="ctrl.invalid && ctrl.touched">{{ errorMessage }}</small>
+    <small *ngIf="ctrl.errors?.['minlength'] && ctrl.touched">{{ lengthErrorMessage }}</small>
+  </div>
+</div>

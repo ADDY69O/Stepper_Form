@@ -11,3 +11,45 @@
     width: 100vw;
     height: 100vh;
 }
+
+:root {
+    --font-family-main: "Montserrat", sans-serif;
+    --font-family-alternate: "Platypi", serif;
+    --primary-color: #1e64d4;
+    --secondary-color: #f0483e;
+    --success-color: #248c46;
+    --background-color: #f9f9f9;
+    --border-color: #000;
+    --hover-background: #e0e0e0;
+    --text-color: #333;
+    --page-size: 22px;
+    --page-font-size: 19px;
+    --border-radius: 12px;
+    --padding-small: 10px;
+    --padding-medium: 20px;
+    --margin-small: 20px;
+    --margin-medium: 12px;
+    --font-size-small: 16px;
+    --font-size-medium: 22px;
+    --font-size-large: 24px;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --transition-duration: 0.3s;
+    --nav-height: 7%;
+    --logo-padding: 8px 15px;
+    --logo-border-bottom: 5px solid #EAF3F8;
+    --logo-font-size: 28px;
+    --input-height: 29px;
+    --input-margin-top: 17px;
+    --p-margin-top: 10px;
+    --gap-small: 20px;
+    --error-color: red;
+    --button-width: 80px;
+    --button-height: 40px;
+    --button-border-radius: 12px;
+    --add-button-bg: #1D64D4;
+    --remove-button-bg: #F0483E;
+    --scroll-height: 300px;
+  }
+  
+  
+  
